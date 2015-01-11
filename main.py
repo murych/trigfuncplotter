@@ -1,10 +1,11 @@
-# -*-encoding utf-8 -*-
 import wx
+import wx.html as html
+from math import *
+import math as m
 from pylab import *
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 from matplotlib.backends.backend_wxagg import NavigationToolbar2WxAgg as NavigationToolbar
 import matplotlib.pyplot as plt
-
 # declare list of functions
 global functypes, functype
 functypes = ['sin', 'cos', 'tg', 'ctg', 'arcsin', 'arccos', 'arctg', 'arcctg']
@@ -12,7 +13,6 @@ functype = ['sin']
 
 
 class p1(wx.Panel):
-
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
         self.figure = plt.figure()
@@ -25,7 +25,7 @@ class p1(wx.Panel):
         matplotlib.rc('xtick', labelsize=14)
         matplotlib.rc('ytick', labelsize=14)
         # set limit of the plotting
-        x = np.linspace((-2 * np.pi), (2 * np.pi), 256, endpoint=True)
+        x = np.linspace((-2 * m.pi), (2 * m.pi), 256, endpoint=True)
         # foolsecure(c)
         if functype[0] in functypes:
             # choosing type of function
@@ -72,8 +72,9 @@ class p1(wx.Panel):
         ax.yaxis.set_ticks_position('left')
         ax.spines['left'].set_position(('data', 0))
         xlim(x.min() * 1.1, x.max() * 1.1)
-        xticks([(-2 * np.pi), (-3 * np.pi / 2), -np.pi, -np.pi / 2, 0, np.pi / 2, np.pi, (3 * np.pi / 2), (2 * np.pi)],
-               [r'$-2\pi$', r'$-\frac{3}{2\pi}$', r'$-\pi$', r'$-\frac{\pi}{2}$', r'$0$', r'$+\frac{\pi}{2}$', r'$+\pi$', r'$+\frac{3}{2\pi}$', r'$+2\pi$'])
+        xticks([(-2 * m.pi), (-3 * m.pi / 2), -m.pi, -m.pi / 2, 0, m.pi / 2, m.pi, (3 * m.pi / 2), (2 * m.pi)],
+               [r'$-2\pi$', r'$-\frac{3}{2\pi}$', r'$-\pi$', r'$-\frac{\pi}{2}$', r'$0$', r'$+\frac{\pi}{2}$',
+                r'$+\pi$', r'$+\frac{3}{2\pi}$', r'$+2\pi$'])
         ylim(-4, 4)
         yticks([-5, -4, -3, -2, -1, +1, +2, +3, +4, +5],
                [r'$-5$', r'$-4$', r'$-3$', r'$-2$', r'$-1$', r'$+1$', r'$+2$', r'$+3$', r'$+4$', r'$+5$'])
@@ -84,10 +85,9 @@ class p1(wx.Panel):
 
 
 class TestFrame(wx.Frame):
-
     def __init__(self, parent, title):
-        wx.Frame.__init__(self, parent, title=title, size=(645, 650), style=wx.RESIZE_BORDER | wx.MINIMIZE_BOX | wx.SYSTEM_MENU |
-                          wx.CAPTION | wx.CLOSE_BOX | wx.CLIP_CHILDREN)
+        wx.Frame.__init__(self, parent, title=title, size=(645, 620), style=wx.MINIMIZE_BOX | wx.SYSTEM_MENU |
+                                                                            wx.CAPTION | wx.CLOSE_BOX | wx.CLIP_CHILDREN)
         self.sp = wx.SplitterWindow(self)
         self.p1 = p1(self.sp)
         self.p2 = wx.Panel(self.sp, style=wx.SUNKEN_BORDER)
@@ -97,64 +97,84 @@ class TestFrame(wx.Frame):
         self.statusbar = self.CreateStatusBar()
         self.statusbar.SetStatusText("Wow")
 
-        self.functypeentername = wx.StaticText(
-            self.p2, -1, pos=(10, 35), label='Type:')
-        self.typepick = wx.Choice(
-            self.p2, -1, pos=(50, 30), choices=functypes)  # old pos=(300,63)
-        self.Bind(wx.EVT_CHOICE, self.typepicker, self.typepick)
+        fist_row_elements_size = [60, 20, 90, 100, 110]
+        """ [0] - width 60
+            [1] - height 30
+            [2] - width 90
+            [3] - width 100
+            [4] - width 110 """
 
-        self.functypeentername = wx.StaticText(
-            self.p2, -1, pos=(130, 35), label='a:')
-        self.amplitudeenter = wx.TextCtrl(
-            self.p2, -1, size=(40, 20), pos=(145, 30), value='1')
+        first_row_elements_pos = []
 
-        self.functypeentername = wx.StaticText(
-            self.p2, -1, pos=(190, 35), label='k:')
-        self.ciclycfreqenter = wx.TextCtrl(
-            self.p2, -1, size=(40, 20), pos=(205, 30), value='1')
+        second_row_elements_size = [40, 20, 60]
+        """ [0] - width 40
+            [1] - height 30
+            [2] - width 60 """
 
-        self.functypeentername = wx.StaticText(
-            self.p2, -1, pos=(250, 35), label='shiftx:')
-        self.shiftxenter = wx.TextCtrl(
-            self.p2, -1, size=(40, 20), pos=(295, 30), value='0')
+        second_row_elements_pos = []
 
-        self.functypeentername = wx.StaticText(
-            self.p2, -1, pos=(340, 35), label='shifty:')
-        self.shiftyenter = wx.TextCtrl(
-            self.p2, -1, size=(40, 20), pos=(385, 30), value='0')
-
-        self.plotbut = wx.Button(
-            self.p2, -1, "Plot", size=(60, 20), pos=(435, 30))
-        self.plotbut.Bind(wx.EVT_BUTTON, self.plot)
-
-        self.sibut = wx.Button(
-            self.p2, -1, "Zoom", size=(60, 20), pos=(10, 63))
+        self.sibut = wx.Button(self.p2, -1, "Zoom", size=(fist_row_elements_size[0], fist_row_elements_size[1]),
+                               pos=(10, 10))
         self.sibut.Bind(wx.EVT_BUTTON, self.zoom)
 
-        self.hibut = wx.Button(self.p2, -1, "Pan", size=(60, 20), pos=(70, 63))
+        self.hibut = wx.Button(self.p2, -1, "Pan", size=(fist_row_elements_size[0], fist_row_elements_size[1]),
+                               pos=(70, 10))
         self.hibut.Bind(wx.EVT_BUTTON, self.pan)
 
-        self.hmbut = wx.Button(
-            self.p2, -1, "Home", size=(60, 20), pos=(130, 63))
+        self.hmbut = wx.Button(self.p2, -1, "Home", size=(fist_row_elements_size[0], fist_row_elements_size[1]),
+                               pos=(130, 10))
         self.hmbut.Bind(wx.EVT_BUTTON, self.home)
 
-        self.savebut = wx.Button(
-            self.p2, -1, "Save Graph", size=(100, 20), pos=(190, 63))
+        self.addgraphbut = wx.Button(self.p2, -1, 'Add Graph',
+                                     size=(fist_row_elements_size[2], fist_row_elements_size[1]), pos=(190, 10))
+
+        self.delgraphbut = wx.Button(self.p2, -1, 'Delete Graph',
+                                     size=(fist_row_elements_size[4], fist_row_elements_size[1]), pos=(280, 10))
+
+        self.savebut = wx.Button(self.p2, -1, "Save Graph", size=(fist_row_elements_size[3], fist_row_elements_size[1]),
+                                 pos=(390, 10))
         self.savebut.Bind(wx.EVT_BUTTON, self.savegraph)
 
-        filemenu = wx.Menu()
+        self.functypeentername = wx.StaticText(self.p2, -1, pos=(10, 50), label='Type:')
+        self.typepick = wx.Choice(self.p2, -1, pos=(50, 45), choices=functypes)
+        self.Bind(wx.EVT_CHOICE, self.typepicker, self.typepick)
 
-        menuAbout = filemenu.Append(
-            wx.ID_ABOUT, '&About', 'Information about this program')
-        menuExit = filemenu.Append(
-            wx.ID_EXIT, '&Exit', 'Terminate the program')
+        self.functypeentername = wx.StaticText(self.p2, -1, pos=(130, 50), label='a:')
+        self.amplitudeenter = wx.TextCtrl(self.p2, -1, size=(40, 20), pos=(145, 45), value='1')
+
+        self.functypeentername = wx.StaticText(self.p2, -1, pos=(190, 50), label='k:')
+        self.ciclycfreqenter = wx.TextCtrl(self.p2, -1, size=(second_row_elements_size[0],
+                                                              second_row_elements_size[1]), pos=(205, 45), value='1')
+
+        self.functypeentername = wx.StaticText(self.p2, -1, pos=(250, 50), label='shiftx:')
+        self.shiftxenter = wx.TextCtrl(self.p2, -1, size=(second_row_elements_size[0],
+                                                          second_row_elements_size[1]), pos=(295, 45), value='0')
+
+        self.functypeentername = wx.StaticText(self.p2, -1, pos=(340, 50), label='shifty:')
+        self.shiftyenter = wx.TextCtrl(self.p2, -1, size=(second_row_elements_size[0],
+                                                          second_row_elements_size[1]), pos=(385, 45), value='0')
+
+        self.plotbut = wx.Button(self.p2, -1, "Plot", size=(second_row_elements_size[2],
+                                                            second_row_elements_size[1]), pos=(435, 45))
+        self.plotbut.Bind(wx.EVT_BUTTON, self.plot)
+
+        filemenu = wx.Menu()
+        helpmenu = wx.Menu()
+
+        menuExit = filemenu.Append(wx.ID_EXIT, '&Exit', 'Terminate the program')
+        menuHelp = helpmenu.Append(wx.ID_HELP, '&Help', 'Help with usage of this program')
+        menuAbout = helpmenu.Append(wx.ID_ABOUT, '&About', 'Information about this program')
 
         menuBar = wx.MenuBar()
         menuBar.Append(filemenu, '&File')
+        menuBar.Append(helpmenu, '&Help')
+
         self.SetMenuBar(menuBar)
 
-        self.Bind(wx.EVT_MENU, self.OnAbout, menuAbout)
         self.Bind(wx.EVT_MENU, self.OnExit, menuExit)
+        self.Bind(wx.EVT_MENU, self.OnAbout, menuAbout)
+        self.Bind(wx.EVT_MENU, self.OnHelp, menuHelp)
+
 
     def zoom(self, event):
         self.statusbar.SetStatusText("Zoom")
@@ -171,40 +191,104 @@ class TestFrame(wx.Frame):
     def plot(self, event):
         self.statusbar.SetStatusText("Plot")
         global functype, a, k, shiftx, shifty
-        # functype = self.functypeenter.GetValue()
         a = float(self.amplitudeenter.GetValue())
         k = float(self.ciclycfreqenter.GetValue())
         shiftx = float(self.shiftxenter.GetValue())
         shifty = float(self.shiftyenter.GetValue())
         self.p1.plot()
 
-    # saving graphics
     def savegraph(self, event):
+        """This function saving grapf as an image
+        with adjustable name into program's folder.
+        TO-DO:
+        Allow to choose directory to save"""
         self.statusbar.SetStatusText('Save Graph')
-        savefigdlg = wx.TextEntryDialog(
-            self, 'Enter Graph Name', 'Saving Graph', 'graph1')
+        savefigdlg = wx.TextEntryDialog(self, 'Enter Graph Name', 'Saving Graph', 'graph1')
         if savefigdlg.ShowModal() == wx.ID_OK:
             graphname = savefigdlg.GetValue()
-        # elif savefigdlg.ShowModal() == wx.ID_CANCEL:
+            plt.savefig(graphname + '.png')
         else:
             savefigdlg.Destroy()
-        plt.savefig(graphname + '.png')
 
     def typepicker(self, event):
+        """This function picks type of function"""
         del functype[0]
         functype.insert(0, str(self.typepick.GetStringSelection()))
-        # print(functype[0])
 
-    # about screen
     def OnAbout(self, e):
-        dlg = wx.MessageDialog(self, "Trigonometry functions plotter\nby Timur Mayzenberg\nhttps://github.com/murych/trigfuncplotter\nVersion 1.0",
-                               "About", wx.OK | wx.ICON_INFORMATION)
-        dlg.ShowModal()
-        dlg.Destroy()
+
+        description = """TrigPlot is an application for plotting Trigonometry
+functions graphics for the Unix  and Windows operating systems. """
+
+        licence = """TrigPlot is free software; you can redistribute 
+it and/or modify it under the terms of the GNU General Public License as 
+published by the Free Software Foundation; either version 2 of the License, 
+or (at your option) any later version.
+
+TrigPlot is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+See the GNU General Public License for more details. You should have 
+received a copy of the GNU General Public License along with File Hunter; 
+if not, write to the Free Software Foundation, Inc., 59 Temple Place, 
+Suite 330, Boston, MA  02111-1307  USA"""
+
+        info = wx.AboutDialogInfo()
+        info.SetIcon(wx.Icon('images/about-icon.png', wx.BITMAP_TYPE_PNG))
+        info.SetName('TrigPlot')
+        info.SetVersion('1.1')
+        info.SetDescription(description)
+        info.SetCopyright('(C) 2014 Timur Mayzenberg')
+        info.SetWebSite('https://github.com/murych/trigfuncplotter')
+        info.SetLicence(licence)
+        info.AddDeveloper('Timur Mayzenberg')
+
+        wx.AboutBox(info)
+
+    def OnHelp(self, e):
+        help_window = HelpWindow(None, 'Help')
+        help_window.Show()
 
     # exit
     def OnExit(self, e):
         self.Close(True)
+
+
+help_page_html = '<html>\
+<h1>TrigPlot Help</h1>\
+<p><img alt="" src="images/help-image.png" /></p>\
+<ol>\
+    <li>Amplitude</li>\
+    <li>Function type (sin, cos, ect.)</li>\
+    <li>Cycliq Frequency</li>\
+    <li>Shift on OX</li>\
+    <li>Shift on OY</li>\
+</ol>\
+<p>Enter parametrs of your graphic into text input fields and press &quot;<strong>Plot</strong>&quot; button.</p>\
+<p>Use &quot;<strong>Zoom</strong>&quot; button to select area You want to zoom.</p>\
+<p>Use &quot;<strong>Pan</strong>&quot; button to navigate through Your plot.</p>\
+<p>Use &quot;<strong>Home</strong>&quot; button to restore the default view.</p>\
+<p>Use &quot;<strong>Add Graph</strong>&quot; button to add and &quot;<strong>Delete Graph</strong>&quot; to delete additional graphs.</p>\
+<p>Use &quot;<strong>Save Graph</strong>&quot; button to save Your plot as an image.</p>\
+</html>'
+
+
+class HelpWindow(wx.Frame):
+    def __init__(self, parent, title):
+        wx.Frame.__init__(self, parent, title=title, size=(450, 400),
+                          style=wx.MINIMIZE_BOX | wx.CAPTION | wx.CLOSE_BOX | wx.CLIP_CHILDREN)
+        help_panel = wx.Panel(self, -1)
+        vbox = wx.BoxSizer(wx.VERTICAL)
+        help_window_html = html.HtmlWindow(help_panel, -1, style=wx.NO_BORDER)
+        help_window_html.SetBackgroundColour(wx.RED)
+        help_window_html.SetStandardFonts()
+        help_window_html.SetPage(help_page_html)
+        vbox.Add((-1, 10), 0)
+        vbox.Add(help_window_html, 1, wx.EXPAND | wx.ALL, 9)
+        help_panel.SetSizer(vbox)
+        self.Centre()
+        self.Show(True)
+
 
 app = wx.App(redirect=False)
 frame = TestFrame(None, "Trigonometry functions plotter")
