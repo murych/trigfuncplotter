@@ -1,5 +1,6 @@
 **TrigPlot** is an application for plotting trigonometry functions graphics for the Linux, Windows and MacOS operating systems.
 
+![main window](https://36.media.tumblr.com/3e430bacda894a41b361e5b83ae40557/tumblr_njtxiosjAv1s1teono2_1280.png)
 
 ##Requiments
 * Python 2.7.*
