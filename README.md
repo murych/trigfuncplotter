@@ -1,10 +1,7 @@
-About
-===========================
-TrigPlot is an application for plotting trigonometry functions graphics for the Linux, Windows and MacOS operating systems.
+**TrigPlot** is an application for plotting trigonometry functions graphics for the Linux, Windows and MacOS operating systems.
 
 
-Requiments
-===========================
+##Requiments
 * Python 2.7.*
 * wxPython
 * pylab
@@ -14,9 +11,8 @@ Requiments
 * MacOS (Lion)
 
 
-Changelog
-===========================
-##### Version 1.6
+##Changelog
+### Version 1.6
 * now You can plot up to 3 functions:
     - *f(x)*
     - *g(x)*
@@ -27,22 +23,22 @@ Changelog
     - *PDF*
     - *JPG/JPEG*
 
-##### Version 1.5
+### Version 1.5
 * rewrited `Help` section
 * improved stability
 
-##### Version 1.4
+### Version 1.4
 * added improved color picker for graph - now You can use `RGB` or `HEX` color code
 * added new file types to save plot
     - *svg*
     - *pdf*
     - *jpg*
 
-##### Version 1.3
+### Version 1.3
 * improved file saving dialog, now You can choose location to save Your graph
 * added parameters into legend
 
-##### Version 1.2
+### Version 1.2
 * added `Changelog` section
 * added colors for plot
     - *red*
@@ -52,11 +48,11 @@ Changelog
     - *cyan*
     - *black*
 
-##### Version 1.1
+### Version 1.1
 * added `Help` section
 * added `About` section
 
-##### Version 1.0
+### Version 1.0
 * added 4 functions
     - *arcsin(x)*
     - *arccos(x)*
@@ -68,7 +64,7 @@ Changelog
 * added project's home page on GitHub in `About`
 * removed sample pic
 
-##### Version 0.1
+### Version 0.1
 * plotting 4 types of function
     - *sin(x)*
     - *cos(x)*
@@ -76,8 +72,4 @@ Changelog
     - *ctg(x)*
 * navigating though plot
 
-
-Credits
-===========================
-Developed by [Timur Mayzenberg](https://facebook.com/mayzenberg)
 
