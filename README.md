@@ -14,34 +14,34 @@
 
 ##Changelog
 ### Version 1.6
-- [] now You can plot up to 3 functions:
+- [ ] now You can plot up to 3 functions:
     - *f(x)*
     - *g(x)*
     - *h(x)*
-- [] now `Save` is `Export`, placed in `File` menu. You can export to:
+- [x] now `Save` is `Export`, placed in `File` menu. You can export to:
     - *PNG*
     - *SVG*
     - *PDF*
     - *JPG/JPEG*
 
 ### Version 1.5
-* rewrited `Help` section
-* improved stability
+* [x] rewrited `Help` section
+* [x] improved stability
 
 ### Version 1.4
-* added improved color picker for graph - now You can use `RGB` or `HEX` color code
-* added new file types to save plot
+* [x] added improved color picker for graph - now You can use `RGB` or `HEX` color code
+* [x] added new file types to save plot
     - *svg*
     - *pdf*
     - *jpg*
 
 ### Version 1.3
-* improved file saving dialog, now You can choose location to save Your graph
-* added parameters into legend
+* [x] improved file saving dialog, now You can choose location to save Your graph
+* [x] added parameters into legend
 
 ### Version 1.2
-* added `Changelog` section
-* added colors for plot
+* [x] added `Changelog` section
+* [x] added colors for plot
     - *red*
     - *blue*
     - *green*
@@ -50,27 +50,27 @@
     - *black*
 
 ### Version 1.1
-* added `Help` section
-* added `About` section
+* [x] added `Help` section
+* [x] added `About` section
 
 ### Version 1.0
-* added 4 functions
+* [x] added 4 functions
     - *arcsin(x)*
     - *arccos(x)*
     - *arctg(x)*
     - *arcctg(x)*
-* drop-down menu for changing function
-* axis tips are now fractions
-* saving plot as *.png* file in program directory
-* added project's home page on GitHub in `About`
-* removed sample pic
+* [x] drop-down menu for changing function
+* [x] axis tips are now fractions
+* [x] saving plot as *.png* file in program directory
+* [x] added project's home page on GitHub in `About`
+* [x] removed sample pic
 
 ### Version 0.1
-* plotting 4 types of function
+* [x] plotting 4 types of function
     - *sin(x)*
     - *cos(x)*
     - *tg(x)*
     - *ctg(x)*
-* navigating though plot
+* [x] navigating though plot
 
 
