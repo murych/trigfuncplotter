@@ -14,11 +14,11 @@
 
 ##Changelog
 ### Version 1.6
-* now You can plot up to 3 functions:
+- [] now You can plot up to 3 functions:
     - *f(x)*
     - *g(x)*
     - *h(x)*
-* now `Save` is `Export`, placed in `File` menu. You can export to:
+- [] now `Save` is `Export`, placed in `File` menu. You can export to:
     - *PNG*
     - *SVG*
     - *PDF*
