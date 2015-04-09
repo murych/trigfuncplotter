@@ -21,62 +21,66 @@ colorHexStr = 'red'
 
 
 class p1(wx.Panel):
-    def __init__(self, parent):
-        wx.Panel.__init__(self, parent)
-        self.figure = plt.figure()
-        self.canvas = FigureCanvas(self, -1, self.figure)
-        self.toolbar = NavigationToolbar(self.canvas)
-        self.toolbar.Hide()
+	def __init__(self, parent):
+		wx.Panel.__init__(self, parent)
+		self.figure = plt.figure()
+		self.canvas = FigureCanvas(self, -1, self.figure)
+		self.toolbar = NavigationToolbar(self.canvas)
+		self.toolbar.Hide()
 
-    def plot(self):
-        #set size of the axes ticks
-        matplotlib.rc('xtick', labelsize=14)
-        matplotlib.rc('ytick', labelsize=14)
-        #set limit of the plotting
-        x = np.linspace((-2 * m.pi), (2 * m.pi), 256, endpoint=True)
-        if functype[0] == 'sin':
-            data = (a * np.sin(x * k) + shiftx) + shifty
-        elif functype[0] == 'cos':
-            data = (a * np.cos(x * k) + shiftx) + shifty
-        elif functype[0] == 'tg':
-            data = (a * np.tan(x * k) + shiftx) + shifty
-        elif functype[0] == 'ctg':
-            data = (a * (1 / np.tan(x * k)) + shiftx) + shifty
-        elif functype[0] == 'arcsin':
-            data = (a * np.arcsin(x * k) + shiftx) + shifty
-        elif functype[0] == 'arccos':
-            data = (a * np.arccos(x * k) + shiftx) + shifty
-        elif functype[0] == 'arctg':
-            data = (a * np.arctan(x * k) + shiftx) + shifty
-        elif functype[0] == 'arcctg':
-            data = (a * (1 / np.arctan(x * k)) + shiftx) + shifty
-        ax = self.figure.add_subplot(111)
-        ax.hold(False)
-        #plotting
-        ax.plot(x, data, colorHexStr, linewidth=2,
-                label=functype[0] + '(x)\na: ' + str(int(a)) + '\nk: ' + str(int(k)) + '\nshiftx: ' + str(
-                    int(shiftx)) + '\nshifty: ' + str(int(shifty)))
-        #adding legend
-        legend(loc='upper left', prop={'size': 10})
-        #setting ticks
-        ax = gca()
-        ax.spines['right'].set_color('none')
-        ax.spines['top'].set_color('none')
-        ax.xaxis.set_ticks_position('bottom')
-        ax.spines['bottom'].set_position(('data', 0))
-        ax.yaxis.set_ticks_position('left')
-        ax.spines['left'].set_position(('data', 0))
-        # xlim(x.min() * 1.1, x.max() * 1.1)
-        xticks([(-2 * m.pi), (-3 * m.pi / 2), -m.pi, -m.pi / 2, 0, m.pi / 2, m.pi, (3 * m.pi / 2), (2 * m.pi)],
-               [r'$-2\pi$', r'$-\frac{3}{2\pi}$', r'$-\pi$', r'$-\frac{\pi}{2}$', r'$0$', r'$+\frac{\pi}{2}$',
-                r'$+\pi$', r'$+\frac{3}{2\pi}$', r'$+2\pi$'])
-        ylim(-4, 4)
-        yticks([-5, -4, -3, -2, -1, +1, +2, +3, +4, +5],
-               [r'$-5$', r'$-4$', r'$-3$', r'$-2$', r'$-1$', r'$+1$', r'$+2$', r'$+3$', r'$+4$', r'$+5$'])
-        #enable grid
-        ax.grid()
-        #draw
-        self.canvas.draw()
+	def plot(self):
+		# set size of the axes ticks
+		matplotlib.rc('xtick', labelsize=14)
+		matplotlib.rc('ytick', labelsize=14)
+		# set limit of the plotting
+		x = np.linspace((-2 * m.pi), (2 * m.pi), 256, endpoint=True)
+		if functype[0] == 'sin':
+			data = (a * np.sin(x * k) + shiftx) + shifty
+		elif functype[0] == 'cos':
+			data = (a * np.cos(x * k) + shiftx) + shifty
+		elif functype[0] == 'tg':
+			data = (a * np.tan(x * k) + shiftx) + shifty
+		elif functype[0] == 'ctg':
+			data = (a * (1 / np.tan(x * k)) + shiftx) + shifty
+		elif functype[0] == 'arcsin':
+			data = (a * np.arcsin(x * k) + shiftx) + shifty
+		elif functype[0] == 'arccos':
+			data = (a * np.arccos(x * k) + shiftx) + shifty
+		elif functype[0] == 'arctg':
+			data = (a * np.arctan(x * k) + shiftx) + shifty
+		elif functype[0] == 'arcctg':
+			data = (a * (1 / np.arctan(x * k)) + shiftx) + shifty
+		ax = self.figure.add_subplot(111)
+		ax.hold(False)
+		# plotting
+		ax.plot(x, data, colorHexStr, linewidth=2,
+				label=functype[0] + '(x)\na: ' + str(int(a)) + '\nk: ' + str(
+					int(k)) + '\nshiftx: ' + str(
+					int(shiftx)) + '\nshifty: ' + str(int(shifty)))
+		# adding legend
+		legend(loc='upper left', prop={'size': 10})
+		# setting ticks
+		ax = gca()
+		ax.spines['right'].set_color('none')
+		ax.spines['top'].set_color('none')
+		ax.xaxis.set_ticks_position('bottom')
+		ax.spines['bottom'].set_position(('data', 0))
+		ax.yaxis.set_ticks_position('left')
+		ax.spines['left'].set_position(('data', 0))
+		# xlim(x.min() * 1.1, x.max() * 1.1)
+		xticks([(-2 * m.pi), (-3 * m.pi / 2), -m.pi, -m.pi / 2, 0, m.pi / 2, m.pi, (3 * m.pi / 2),
+				(2 * m.pi)],
+			   [r'$-2\pi$', r'$-\frac{3}{2\pi}$', r'$-\pi$', r'$-\frac{\pi}{2}$', r'$0$',
+				r'$+\frac{\pi}{2}$',
+				r'$+\pi$', r'$+\frac{3}{2\pi}$', r'$+2\pi$'])
+		ylim(-4, 4)
+		yticks([-5, -4, -3, -2, -1, +1, +2, +3, +4, +5],
+			   [r'$-5$', r'$-4$', r'$-3$', r'$-2$', r'$-1$', r'$+1$', r'$+2$', r'$+3$', r'$+4$',
+				r'$+5$'])
+		# enable grid
+		ax.grid()
+		# draw
+		self.canvas.draw()
 
 
 class TestFrame(wx.Frame):
