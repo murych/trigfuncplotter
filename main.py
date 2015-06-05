@@ -70,9 +70,9 @@ class p1(wx.Panel):
 		# xlim(x.min() * 1.1, x.max() * 1.1)
 		xticks([(-2 * m.pi), (-3 * m.pi / 2), -m.pi, -m.pi / 2, 0, m.pi / 2, m.pi, (3 * m.pi / 2),
 				(2 * m.pi)],
-			   [r'$-2\pi$', r'$-\frac{3}{2\pi}$', r'$-\pi$', r'$-\frac{\pi}{2}$', r'$0$',
+			   [r'$-2\pi$', r'$-\frac{3\pi}{2}$', r'$-\pi$', r'$-\frac{\pi}{2}$', r'$0$',
 				r'$+\frac{\pi}{2}$',
-				r'$+\pi$', r'$+\frac{3}{2\pi}$', r'$+2\pi$'])
+				r'$+\pi$', r'$+\frac{3\pi}{2}$', r'$+2\pi$'])
 		ylim(-4, 4)
 		yticks([-5, -4, -3, -2, -1, +1, +2, +3, +4, +5],
 			   [r'$-5$', r'$-4$', r'$-3$', r'$-2$', r'$-1$', r'$+1$', r'$+2$', r'$+3$', r'$+4$',
@@ -275,7 +275,7 @@ Suite 330, Boston, MA  02111-1307  USA"""
 		info.SetName('TrigPlot')
 		info.SetVersion('1.5')
 		info.SetDescription(description)
-		info.SetCopyright('(C) 2014 murych')
+		info.SetCopyright('(C) 2015 murych')
 		info.SetWebSite('https://github.com/murych/trigfuncplotter')
 		info.SetLicence(licence)
 		info.AddDeveloper('Timur Mayzenberg')
